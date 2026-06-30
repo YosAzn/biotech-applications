@@ -1,0 +1,307 @@
+/* ===================================================================
+   BioTech Labs — Theme engine (light default / dark) + neon glass cards
+   The app's JSX uses hardcoded dark Tailwind utilities. Those = the DARK
+   theme. We make LIGHT the default by overriding only the slate/white/black
+   surfaces, borders and text under [data-theme="light"]. All neon accent
+   colours are preserved. Dark theme = bare Tailwind (no overrides).
+   =================================================================== */
+
+@property --neon-ang {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+html, body { margin: 0; padding: 0; }
+/* Root element paints the canvas / overscroll colour per theme. */
+html[data-theme="light"] { background-color: #eaeff7; }
+html[data-theme="dark"]  { background-color: #030712; }
+body {
+  background-color: #eaeff7;
+  transition: background-color .45s ease;
+  -webkit-font-smoothing: antialiased;
+}
+[data-theme="dark"] body { background-color: #030712; }
+
+/* Structural shells get stable classes from JSX so we avoid escaping the
+   big arbitrary-value gradient class. */
+.page-shell { background: #eaeff7; }
+[data-theme="dark"] .page-shell { background: #030712; }
+
+.app-bg {
+  background: radial-gradient(ellipse at top, #ffffff 0%, #e7edf7 48%, #dbe4f1 100%) !important;
+}
+[data-theme="dark"] .app-bg {
+  background: radial-gradient(ellipse at top, rgba(30,41,59,.55) 0%, #030712 55%, #030712 100%) !important;
+}
+
+.app-footer { background: #eaeff7; }
+[data-theme="dark"] .app-footer { background: #030712; }
+
+/* The scientific chart stays a dark "data terminal" inset in BOTH themes so
+   the neon plot strokes stay vivid and legible. */
+.chart-shell { background: #0a0f1c; border: 1px solid #1e293b; }
+
+/* =======================  LIGHT THEME OVERRIDES  ==================== */
+
+/* ---- Glass surfaces ---- */
+[data-theme="light"] .bg-slate-900\/40 { background-color: rgba(255,255,255,.55); }
+[data-theme="light"] .bg-slate-900\/50 { background-color: rgba(255,255,255,.50); }
+[data-theme="light"] .bg-slate-900\/60 { background-color: rgba(255,255,255,.62); }
+[data-theme="light"] .bg-slate-900\/95 { background-color: rgba(255,255,255,.90); }
+[data-theme="light"] .bg-slate-800\/50 { background-color: rgba(255,255,255,.55); }
+[data-theme="light"] .bg-slate-800     { background-color: rgba(255,255,255,.85); }
+[data-theme="light"] .bg-white\/5      { background-color: rgba(15,23,42,.045); }
+[data-theme="light"] .bg-white\/10     { background-color: rgba(15,23,42,.07); }
+[data-theme="light"] .hover\:bg-white\/10:hover     { background-color: rgba(15,23,42,.09); }
+[data-theme="light"] .hover\:bg-slate-800\/30:hover { background-color: rgba(15,23,42,.05); }
+[data-theme="light"] .hover\:bg-slate-700:hover     { background-color: rgba(15,23,42,.10); }
+
+/* ---- Borders ---- */
+[data-theme="light"] .border-white\/5   { border-color: rgba(15,23,42,.06); }
+[data-theme="light"] .border-white\/10  { border-color: rgba(15,23,42,.10); }
+[data-theme="light"] .border-white\/20  { border-color: rgba(15,23,42,.14); }
+[data-theme="light"] .border-white\/40  { border-color: rgba(15,23,42,.20); }
+[data-theme="light"] .border-slate-700  { border-color: rgba(15,23,42,.12); }
+[data-theme="light"] .border-slate-800  { border-color: rgba(15,23,42,.09); }
+[data-theme="light"] .border-slate-800\/50 { border-color: rgba(15,23,42,.06); }
+[data-theme="light"] .border-slate-600  { border-color: rgba(15,23,42,.16); }
+[data-theme="light"] .hover\:border-slate-600:hover { border-color: rgba(15,23,42,.22); }
+
+/* ---- Neutral text (skip elements that carry a gradient background) ---- */
+[data-theme="light"] .text-white:not([class*="gradient"]) { color: #0f172a; }
+[data-theme="light"] .text-slate-200 { color: #1e293b; }
+[data-theme="light"] .text-slate-300 { color: #334155; }
+[data-theme="light"] .text-slate-400 { color: #475569; }
+[data-theme="light"] .text-slate-500 { color: #64748b; }
+[data-theme="light"] .text-slate-600 { color: #475569; }
+[data-theme="light"] .hover\:text-white:hover     { color: #0f172a; }
+[data-theme="light"] .hover\:text-slate-300:hover { color: #334155; }
+
+/* ---- Accent text: same hue, darker for contrast on off-white glass ---- */
+[data-theme="light"] .text-purple-400  { color: #7c3aed; }
+[data-theme="light"] .text-cyan-400    { color: #0e7490; }
+[data-theme="light"] .text-cyan-300    { color: #0e7490; }
+[data-theme="light"] .text-emerald-400 { color: #059669; }
+[data-theme="light"] .text-emerald-300 { color: #047857; }
+[data-theme="light"] .text-orange-400  { color: #ea580c; }
+[data-theme="light"] .text-pink-400    { color: #db2777; }
+[data-theme="light"] .text-yellow-400  { color: #b45309; }
+[data-theme="light"] .text-lime-400    { color: #4d7c0f; }
+[data-theme="light"] .text-teal-400    { color: #0d9488; }
+[data-theme="light"] .text-blue-400    { color: #2563eb; }
+[data-theme="light"] .text-blue-300    { color: #1d4ed8; }
+[data-theme="light"] .text-blue-200    { color: #1e40af; }
+[data-theme="light"] .text-amber-400   { color: #b45309; }
+[data-theme="light"] .text-rose-400    { color: #be123c; }
+[data-theme="light"] .text-green-300   { color: #15803d; }
+[data-theme="light"] .text-red-300     { color: #b91c1c; }
+
+/* Buttons whose hover bg becomes a SOLID accent must keep white text on hover
+   (overrides the generic hover:text-white→dark rule above via source order). */
+[data-theme="light"] [class*="hover:bg-blue-600"]:hover,
+[data-theme="light"] [class*="hover:bg-emerald-600"]:hover,
+[data-theme="light"] [class*="hover:bg-cyan-600"]:hover,
+[data-theme="light"] [class*="hover:bg-cyan-500"]:hover { color: #fff; }
+
+/* Hero wordmark — "BIO": לבן→תכלת במצב כהה, אפור-כהה במצב בהיר (כמקור) */
+.hero-title { background-image: linear-gradient(to bottom, #ffffff, #cffafe, #0891b2); }
+[data-theme="light"] .hero-title {
+  background-image: linear-gradient(to bottom, #0f172a, #334155, #475569);
+  filter: none;
+}
+/* "TECH" — כתום במצב בהיר, בורדו במצב כהה (להבדיל ממעבדת הבגרות) */
+.hero-title span {
+  background-image: linear-gradient(to bottom, #fb7185 0%, #be123c 55%, #881337 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+[data-theme="light"] .hero-title span {
+  background-image: linear-gradient(to bottom, #fb923c 0%, #ea580c 55%, #9a3412 100%);
+}
+
+/* =======================  THEME TOGGLE BUTTON  ===================== */
+.theme-toggle {
+  position: fixed; top: 1.1rem; inset-inline-start: 1.1rem; z-index: 120;
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .6rem 1.05rem; border-radius: 999px; cursor: pointer;
+  font-weight: 800; font-size: .95rem;
+  color: #0f172a;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(15,23,42,.12);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 26px -10px rgba(2,6,23,.35);
+  transition: transform .25s ease, box-shadow .3s ease, background .3s ease;
+}
+.theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(2,6,23,.45); }
+[data-theme="dark"] .theme-toggle {
+  color: #e2e8f0;
+  background: rgba(15,23,42,.6);
+  border-color: rgba(255,255,255,.16);
+  box-shadow: 0 0 26px -8px rgba(34,211,238,.5);
+}
+
+/* כפתור אופציית "סירנת הניאון" — פינה שמאלית עליונה (RTL: inset-inline-end), כבוי כברירת מחדל */
+.neon-toggle {
+  position: fixed; top: 1.1rem; inset-inline-end: 1.1rem; z-index: 120;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .6rem 1rem; border-radius: 999px; cursor: pointer;
+  font-weight: 800; font-size: .9rem;
+  color: #64748b;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(15,23,42,.12);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 26px -10px rgba(2,6,23,.25);
+  transition: transform .25s ease, box-shadow .3s ease, color .3s ease, border-color .3s ease;
+}
+.neon-toggle:hover { transform: translateY(-2px); }
+[data-theme="dark"] .neon-toggle {
+  color: #94a3b8; background: rgba(15,23,42,.55); border-color: rgba(255,255,255,.14);
+}
+/* מצב פעיל — הכפתור עצמו מואר בניאון */
+[data-neon="on"] .neon-toggle {
+  color: #22d3ee; border-color: rgba(34,211,238,.6);
+  box-shadow: 0 0 22px -6px rgba(34,211,238,.7);
+}
+
+/* =======================  NEON GLASS LAB CARDS  ==================== */
+.lab-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 2.5rem;
+  transition: transform .5s cubic-bezier(.34,1.4,.5,1), box-shadow .5s ease;
+}
+.lab-card:hover { box-shadow: 0 26px 60px -28px var(--neon); }
+
+/* crisp gradient border that brightens on hover */
+.lab-card::before {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit; padding: 1.6px;
+  background: linear-gradient(150deg,
+              var(--neon) 0%, transparent 38%,
+              transparent 62%, var(--neon) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: .45; transition: opacity .5s ease; z-index: 2; pointer-events: none;
+}
+.lab-card:hover::before { opacity: 1; }
+
+/* blurred running-neon halo behind the card, animates only on hover */
+.lab-card::after {
+  content: "";
+  position: absolute; inset: -2px; border-radius: inherit; z-index: -1;
+  background: conic-gradient(from var(--neon-ang),
+              transparent 0 55%, var(--neon) 78%, transparent 100%);
+  filter: blur(11px); opacity: 0; transition: opacity .55s ease;
+}
+/* "סירנת ניאון" מסתובבת — כבויה כברירת מחדל; נדלקת רק כשמפעילים את האופציה.
+   המסגרת הניאון הסטטית (::before) + ההילה התחתונה (box-shadow) נשארות תמיד. */
+[data-neon="on"] .lab-card:hover::after { opacity: .85; animation: neon-spin 2.8s linear infinite; }
+@keyframes neon-spin { to { --neon-ang: 360deg; } }
+
+/* enlarged corner icon badge (top-right in RTL = inline-start) */
+.lab-icon-badge {
+  position: absolute; top: 1.4rem; inset-inline-start: 1.4rem; z-index: 3;
+  width: 6rem; height: 6rem; border-radius: 1.7rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--neon);
+  background: color-mix(in srgb, var(--neon) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--neon) 38%, transparent);
+  box-shadow: inset 0 0 22px -8px var(--neon);
+  transition: transform .55s cubic-bezier(.34,1.56,.64,1), box-shadow .5s ease;
+}
+.lab-icon-badge svg { width: 3.2rem; height: 3.2rem; }
+.lab-card:hover .lab-icon-badge {
+  transform: translateY(-9px) scale(1.14) rotate(-8deg);
+  box-shadow: 0 14px 32px -10px var(--neon), inset 0 0 26px -6px var(--neon);
+}
+
+/* large CENTERED watermark emblem (enlarged + thicker stroke set in JSX) */
+.lab-watermark {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  z-index: 0; color: var(--neon); opacity: .10; pointer-events: none;
+  transition: transform .7s ease, opacity .5s ease;
+}
+.lab-watermark svg { width: 16rem; height: 16rem; }
+.lab-card:hover .lab-watermark { opacity: .16; transform: translate(-50%,-50%) scale(1.07) rotate(6deg); }
+[data-theme="light"] .lab-watermark { opacity: .11; }
+[data-theme="light"] .lab-card:hover .lab-watermark { opacity: .18; }
+
+/* =======================  GALLERY VIEWER  ======================== */
+.gallery-backdrop {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.25rem;
+  background: rgba(2,6,23,.82);
+  backdrop-filter: blur(10px);
+  animation: gv-fade .3s ease;
+}
+[data-theme="light"] .gallery-backdrop { background: rgba(100,116,139,.45); }
+@keyframes gv-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.gallery-panel {
+  position: relative;
+  width: min(1100px, 96vw); height: min(86vh, 900px);
+  display: flex; flex-direction: column;
+  border-radius: 2rem; overflow: hidden;
+  background: rgba(15,23,42,.92);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 40px 120px -30px rgba(0,0,0,.9);
+  animation: gv-pop .4s cubic-bezier(.34,1.4,.5,1);
+}
+[data-theme="light"] .gallery-panel {
+  background: rgba(255,255,255,.96);
+  border-color: rgba(15,23,42,.12);
+  box-shadow: 0 40px 120px -30px rgba(2,6,23,.5);
+}
+@keyframes gv-pop { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.gallery-stage {
+  flex: 1; position: relative; display: flex; align-items: center; justify-content: center;
+  background: #0b1020; overflow: hidden;
+}
+[data-theme="light"] .gallery-stage { background: #eef2f8; }
+.gallery-stage iframe, .gallery-stage img, .gallery-stage embed {
+  width: 100%; height: 100%; border: 0; object-fit: contain; background: #0b1020;
+}
+[data-theme="light"] .gallery-stage img { background: #eef2f8; }
+
+.gallery-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 3.4rem; height: 3.4rem; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  color: #fff; background: rgba(15,23,42,.6);
+  border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(8px); transition: transform .2s, background .2s; z-index: 4;
+}
+.gallery-nav:hover { background: rgba(34,211,238,.85); transform: translateY(-50%) scale(1.08); }
+.gallery-nav.prev { inset-inline-start: 1rem; }
+.gallery-nav.next { inset-inline-end: 1rem; }
+.gallery-nav:disabled { opacity: .25; cursor: default; }
+
+.gv-thumb {
+  width: 3.4rem; height: 3.4rem; border-radius: .8rem; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent; flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.07); color: #94a3b8;
+  transition: border-color .2s, transform .2s;
+}
+.gv-thumb:hover { transform: translateY(-2px); }
+.gv-thumb.active { border-color: var(--gv-accent, #22d3ee); }
+.gv-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* upload dropzone */
+.upload-zone {
+  border: 2px dashed rgba(15,23,42,.18);
+  border-radius: 2rem; transition: border-color .3s, background .3s;
+}
+[data-theme="dark"] .upload-zone { border-color: rgba(255,255,255,.18); }
+.upload-zone.drag { border-color: #22d3ee; background: rgba(34,211,238,.08); }
+
+/* scrollbars hidden helper (also defined inline elsewhere) */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-card, .lab-icon-badge, .lab-watermark, .lab-card::after { transition: none !important; animation: none !important; }
+}
