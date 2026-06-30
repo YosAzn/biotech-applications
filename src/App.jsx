@@ -34,6 +34,7 @@ const fileKind = (mime = '') =>
 
 // --- מצגות מקומיות (PDF) המוטמעות ישירות מתוך האתר (public/decks) — המצגת עצמה, לא לינק ---
 const DECK = (file, title) => ({ kind: 'pdf', src: `${import.meta.env.BASE_URL}decks/${file}`, title });
+const IMG = (file, title) => ({ kind: 'image', src: `${import.meta.env.BASE_URL}decks/${file}`, title });
 // תיקיית הפרויקט בדרייב + יעד הגשה (זמני — להחליף בטופס/תיקיית הגשה ייעודית)
 const DRIVE_FOLDER = 'https://drive.google.com/drive/folders/1hJkd1kZHuDRVsauHBMWgFMxf68jhhg1N';
 const SUBMIT_URL = DRIVE_FOLDER;
@@ -117,6 +118,8 @@ const stationsData = [
         items: [{ kind: 'drive', src: "https://drive.google.com/file/d/1dPx5AS24hKwPcvubBhs3aN24FViA_D1U/view", title: "מאמרים ומקורות מידע על האלמוגים (עברית)" }] },
       { label: "תיקיית מאמרי הקבוצות", icon: <BookOpen className="w-6 h-6" />, color: "emerald",
         items: [{ kind: 'drive', src: "https://drive.google.com/drive/folders/1-st1lq2mJECk43SDHXqRwzYzrSu7P4Z7", title: "סקירת ספרות — מאמרי הקבוצות" }] },
+      { label: "תכנית הלימודים — יישומים", icon: <ListChecks className="w-6 h-6" />, color: "blue",
+        items: [DECK('curriculum-plan.pdf', 'תכנית הלימודים — יישומים בביוטכנולוגיה')] },
     ],
   },
   // 2 — כתיבת מבוא --------------------------------------------------
@@ -143,10 +146,16 @@ const stationsData = [
       "שילוב איורים (מבנה הפוליפ, סימביוזה).",
       "ציטוט מקור לכל טענה מדעית."
     ],
+    researchQuestion: "כיצד עקות סביבתיות שונות — טמפרטורה, אוקסיבנזון (קרם הגנה), החמצה (pH), נחושת, אמוניה ומליחות — משפיעות על קצב הפעימות של הקסניה הפועמת ועל ביטוי הגן HSP70? כל קבוצה התמקדה בגורם עקה אחד. המבואות המלאים שכתבו הקבוצות (כולל שאלות המחקר וההשערות שלהן) מקושרים בכפתורי החומרים.",
+    hsp70: "HSP70 (Heat Shock Protein 70) הוא חלבון עקה ממשפחת ה-chaperones, המסייע לקיפול תקין של חלבונים ולהגנה עליהם בתנאי עקה. עלייה בביטוי הגן HSP70 משמשת כסמן מולקולרי לעקה תאית — ולכן הוא המדד התלוי השני במחקר (לצד קצב הפעימות).",
     buttons: [
-      { label: "ראשי הפרקים למבוא", icon: <ListChecks className="w-6 h-6" />, color: "blue",
+      { label: "איך כותבים מבוא (+ משפך הכתיבה)", icon: <FileText className="w-6 h-6" />, color: "blue",
+        items: [DECK('how-to-write-intro.pdf', 'איך כותבים מבוא'), DECK('intro-funnel.pdf', 'משפך כתיבת המבוא')] },
+      { label: "עבודה בקבוצות", icon: <ListChecks className="w-6 h-6" />, color: "emerald",
+        items: [DECK('group-work.pdf', 'עבודה בקבוצות — חיפוש חומרים וכתיבה')] },
+      { label: "ראשי הפרקים למבוא (Drive)", icon: <ListChecks className="w-6 h-6" />, color: "blue",
         items: [{ kind: 'drive', src: "https://docs.google.com/document/d/1ZFrbs3SYCPla30cDWBAYDsNqYo0BTtthYZRssWMZloU/view", title: "מבוא — ראשי פרקים" }] },
-      { label: "מבואות הקבוצות", icon: <FileText className="w-6 h-6" />, color: "emerald",
+      { label: "מבואות הקבוצות — מה שכתבו", icon: <FileText className="w-6 h-6" />, color: "emerald",
         items: [
           { kind: 'drive', src: "https://docs.google.com/document/d/1YTDcxPy4yLkel3TcnjRqUrTp2NBN_gPAE7bHSpn6tMw/view", title: "מבוא — הדר, תומי, טל" },
           { kind: 'drive', src: "https://docs.google.com/document/d/1dSWXD4KH0z2pdLtZLbRe1ieFOowRcSbNPMFIRiZ2Dw8/view", title: "מבוא — ליה, עידו, נדב" },
@@ -178,10 +187,12 @@ const stationsData = [
       "קסניה פועמת = ביו-אינדיקטור לאיכות המים."
     ],
     buttons: [
-      { label: "מצגת: הלבנת אלמוגים (אילת)", icon: <FileText className="w-6 h-6" />, color: "blue",
-        items: [DECK('bleaching-eilat.pdf', 'הלבנת אלמוגים — אילת'), { kind: 'drive', src: "https://drive.google.com/file/d/1m6IXd3-rhZOury2oWT2yS7OXfuXM9C9m/view", title: "מסע מן הפוליפ אל השונית — מצגת (Drive)" }] },
+      { label: "מצגת: מסע מן הפוליפ אל השונית", icon: <FileText className="w-6 h-6" />, color: "blue",
+        items: [DECK('journey-to-reef.pdf', 'מסע מן הפוליפ אל השונית')] },
       { label: "אינפוגרפיקה: שומרי סף האוקיינוס", icon: <ImageIcon className="w-6 h-6" />, color: "emerald",
-        items: [{ kind: 'drive', src: "https://drive.google.com/file/d/1-Rww2XRMd4QYLRJGYTg4QSFPrZa0QJr-/view", title: "עולם האלמוגים — שומרי סף האוקיינוס" }] },
+        items: [IMG('coral-infographic.png', 'עולם האלמוגים — שומרי סף האוקיינוס')] },
+      { label: "הלבנת אלמוגים + יערות הים החיים", icon: <FileText className="w-6 h-6" />, color: "blue",
+        items: [DECK('bleaching-eilat.pdf', 'הלבנת אלמוגים — אילת'), DECK('coral-living-forests.pdf', 'אלמוגים — יערות הים החיים')] },
     ],
   },
   // 4 — שיטות מחקר --------------------------------------------------
@@ -211,6 +222,8 @@ const stationsData = [
     buttons: [
       { label: "מצגת: התלמיד כחוקר", icon: <FileText className="w-6 h-6" />, color: "blue",
         items: [DECK('student-as-researcher.pdf', 'התלמיד כחוקר — סוגי מחקר, שלבים ומבנה המחקר המדעי')] },
+      { label: "שלבי המחקר + האנטומיה של מחקר מדעי", icon: <ListChecks className="w-6 h-6" />, color: "emerald",
+        items: [DECK('research-stages.pdf', 'שלבי המחקר המדעי'), DECK('research-anatomy.pdf', 'האנטומיה של מחקר מדעי')] },
     ],
   },
   // 5 — ניסוי מקדים -------------------------------------------------
@@ -514,18 +527,17 @@ const stationsData = [
     buttons: [
       { label: "מחוון עבודת הגמר + מדריך לתלמיד", icon: <FileText className="w-6 h-6" />, color: "blue",
         items: [DECK('final-project-rubric.pdf', 'מחוון להערכת עבודת גמר מחקרית'), DECK('students-guide.pdf', "Student's Guide — BioTech")] },
-      { label: "מצגת ההצגה + הערכת עמיתים (Drive)", icon: <ClipboardList className="w-6 h-6" />, color: "emerald",
+      { label: "מצגת ומשימת ההצגה + הערכת עמיתים", icon: <ClipboardList className="w-6 h-6" />, color: "emerald",
         items: [
-          { kind: 'drive', src: "https://drive.google.com/file/d/1Qe2hMA36tc8YYCnGWr8HbdhXUS_maxOw/view", title: "משימת הצגת המחקר — מצגת" },
-          { kind: 'drive', src: "https://drive.google.com/file/d/1IPkijhGOSLnJa4c-KFiGclfJ0yH-3Uy4/view", title: "משימת הצגת מחקר + מחוון" },
+          DECK('presentation-task.pdf', 'משימת הצגת המחקר'),
           { kind: 'drive', src: "https://docs.google.com/document/d/188B9Qh253l8d7Wq8zGjNLO8YScCCZUL56FEIRpkc40A/view", title: "טופס הערכת עמיתים" },
         ] },
     ],
   },
 ];
 
-// סדר התצוגה של התחנות (מסע מן הפוליפ אל השונית מוצב לפני כתיבת מבוא)
-const STATION_ORDER = [1, 3, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+// סדר התצוגה: מסע מן הפוליפ אל השונית ראשון (ימין), אז סקירת ספרות, אז כתיבת מבוא
+const STATION_ORDER = [3, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 const orderedStations = STATION_ORDER.map(id => stationsData.find(s => s.id === id)).filter(Boolean);
 
 // --- רכיב כרטיסיות "כללי הכתיבה המדעית" (פליפ-קארדים) ---
@@ -956,8 +968,8 @@ export default function App() {
 
                {/* מסע אל השונית — הרקע המדעי ייפתח ישירות בגלריה */}
                <button onClick={() => openGallery([
-                 { kind: 'drive', src: 'https://drive.google.com/file/d/1m6IXd3-rhZOury2oWT2yS7OXfuXM9C9m/view', title: 'מסע מן הפוליפ אל השונית — מצגת' },
-                 { kind: 'drive', src: 'https://drive.google.com/file/d/1-Rww2XRMd4QYLRJGYTg4QSFPrZa0QJr-/view', title: 'עולם האלמוגים — שומרי סף האוקיינוס' }
+                 DECK('journey-to-reef.pdf', 'מסע מן הפוליפ אל השונית'),
+                 IMG('coral-infographic.png', 'עולם האלמוגים — שומרי סף האוקיינוס')
                ], 0, '#2dd4bf')} className="px-8 py-4 rounded-full border backdrop-blur-md transition-all text-lg font-bold flex items-center gap-3 shadow-xl whitespace-nowrap bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10 hover:border-teal-500/50 hover:text-teal-300">
                  <ImageIcon className="w-6 h-6" /> מסע אל השונית
                </button>
@@ -1187,6 +1199,20 @@ export default function App() {
                         <h3 className={`text-xl font-black ${activeStation.textAccent} mb-4 uppercase tracking-wider`}>על שלב זה במחקר</h3>
                         <p className="text-2xl text-white font-light leading-relaxed">{activeStation.intro}</p>
                       </div>
+
+                      {activeStation.researchQuestion && (
+                        <div className="bg-slate-900/40 border border-slate-800 rounded-[2.5rem] p-10 shadow-2xl">
+                          <h3 className={`text-xl font-black ${activeStation.textAccent} mb-4 uppercase tracking-wider flex items-center gap-3`}><BrainCircuit className="w-6 h-6" /> שאלת המחקר</h3>
+                          <p className="text-2xl text-white font-medium leading-relaxed italic">"{activeStation.researchQuestion}"</p>
+                        </div>
+                      )}
+
+                      {activeStation.hsp70 && (
+                        <div className="bg-slate-900/40 border border-rose-500/30 rounded-[2.5rem] p-8 shadow-2xl">
+                          <h3 className="text-lg font-black text-rose-400 mb-3 uppercase tracking-wider flex items-center gap-3"><Dna className="w-5 h-5" /> רקע: הגן HSP70</h3>
+                          <p className="text-lg text-slate-200 font-light leading-relaxed">{activeStation.hsp70}</p>
+                        </div>
+                      )}
 
                       {activeStation.steps && (
                         <div className="bg-slate-900/40 border border-slate-800 rounded-[2.5rem] p-10 shadow-2xl">
