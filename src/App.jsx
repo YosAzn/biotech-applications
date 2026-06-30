@@ -4,7 +4,7 @@ import {
   LineChart, TestTube2, Droplets, Beaker, Thermometer, Clock,
   GitMerge, Fingerprint, Dna, Zap, Image as ImageIcon,
   CheckCircle2, BrainCircuit, FileText, X, Upload, Trash2, Images, ExternalLink,
-  Sun, Moon, Calculator, BookOpen, RefreshCw, TableProperties, ListChecks
+  Sun, Moon, Calculator, BookOpen, RefreshCw, TableProperties, ListChecks, Shell
 } from 'lucide-react';
 
 // --- Neon accent (hex) per station, derived from its Tailwind textAccent ---
@@ -166,10 +166,10 @@ const stationsData = [
   // 3 — רקע מדעי: מסע מן הפוליפ אל השונית ----------------------------
   {
     id: 3, type: 'background',
-    title: "מסע מן הפוליפ אל השונית",
+    title: "אלמוגים",
     subtitle: "הרקע המדעי — מבנה, סימביוזה ועקה",
     pillar: "רקע מדעי",
-    icon: <Fingerprint />,
+    icon: <Shell />,
     textAccent: "text-teal-400", borderAccent: "border-teal-500/40", color: "from-teal-400 to-emerald-500",
     metrics: [{ label: "היחידה", value: "פוליפ" }, { label: "המערכת", value: "שונית" }],
     intro: "מסע מהיחידה הבסיסית — הפוליפ — אל המבנה המורכב של שונית האלמוגים. הפוליפ הוא יצור גלילי בעל פתח-פה מוקף זרועות-ציד ותאים צורבים, המפריש שלד גירני ובונה מושבה בעזרת הנצה. רוב האלמוגים חיים בסימביוזה עם אצות זואוקסנטלות המספקות עד 90% מהאנרגיה בפוטוסינתזה. עקת חום או החמצה משבשת את הסימביוזה וגורמת להלבנה. הקסניה הפועמת היא אלמוג רך ש\"פועם\" — תנועת זרועות מחזורית הרגישה לתנאי הסביבה — ולכן משמשת כביו-אינדיקטור חי לעקה.",
@@ -187,8 +187,8 @@ const stationsData = [
       "קסניה פועמת = ביו-אינדיקטור לאיכות המים."
     ],
     buttons: [
-      { label: "מצגת: מסע מן הפוליפ אל השונית", icon: <FileText className="w-6 h-6" />, color: "blue",
-        items: [DECK('journey-to-reef.pdf', 'מסע מן הפוליפ אל השונית')] },
+      { label: "מצגות: מסע אל השונית + הכנה למחקר", icon: <FileText className="w-6 h-6" />, color: "blue",
+        items: [DECK('journey-to-reef.pdf', 'מסע מן הפוליפ אל השונית'), DECK('corals-research-prep.pdf', 'אלמוגים — הכנה למחקר ולכתיבת המבוא')] },
       { label: "אינפוגרפיקה: שומרי סף האוקיינוס", icon: <ImageIcon className="w-6 h-6" />, color: "emerald",
         items: [IMG('coral-infographic.png', 'עולם האלמוגים — שומרי סף האוקיינוס')] },
       { label: "הלבנת אלמוגים + יערות הים החיים", icon: <FileText className="w-6 h-6" />, color: "blue",
@@ -222,8 +222,8 @@ const stationsData = [
     buttons: [
       { label: "מצגת: התלמיד כחוקר", icon: <FileText className="w-6 h-6" />, color: "blue",
         items: [DECK('student-as-researcher.pdf', 'התלמיד כחוקר — סוגי מחקר, שלבים ומבנה המחקר המדעי')] },
-      { label: "שלבי המחקר + האנטומיה של מחקר מדעי", icon: <ListChecks className="w-6 h-6" />, color: "emerald",
-        items: [DECK('research-stages.pdf', 'שלבי המחקר המדעי'), DECK('research-anatomy.pdf', 'האנטומיה של מחקר מדעי')] },
+      { label: "שלבי המחקר המדעי", icon: <ListChecks className="w-6 h-6" />, color: "emerald",
+        items: [DECK('research-stages.pdf', 'שלבי המחקר המדעי')] },
     ],
   },
   // 5 — ניסוי מקדים -------------------------------------------------
@@ -969,10 +969,9 @@ export default function App() {
 
                {/* מסע אל השונית — הרקע המדעי ייפתח ישירות בגלריה */}
                <button onClick={() => openGallery([
-                 DECK('journey-to-reef.pdf', 'מסע מן הפוליפ אל השונית'),
-                 IMG('coral-infographic.png', 'עולם האלמוגים — שומרי סף האוקיינוס')
+                 DECK('research-anatomy.pdf', 'האנטומיה של מחקר מדעי')
                ], 0, '#2dd4bf')} className="px-8 py-4 rounded-full border backdrop-blur-md transition-all text-lg font-bold flex items-center gap-3 shadow-xl whitespace-nowrap bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10 hover:border-teal-500/50 hover:text-teal-300">
-                 <ImageIcon className="w-6 h-6" /> מסע אל השונית
+                 <ImageIcon className="w-6 h-6" /> האנטומיה של מחקר מדעי
                </button>
 
                {/* קישור לתיקיית הדרייב של הפרויקט */}
