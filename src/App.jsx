@@ -706,7 +706,8 @@ function GalleryViewer({ items, startIndex = 0, accent = '#22d3ee', onClose }) {
 
   const stage = () => {
     if (item.kind === 'image') return <img src={item.src} alt={item.title || ''} />;
-    if (item.kind === 'pdf')   return <iframe src={item.src} title={item.title || 'pdf'} />;
+    // צופה PDF נקי: ביטול פאנל הסליידים בצד (navpanes=0) + התאמת רוחב לעמוד (פוקוס), עם שמירת סרגל ניווט/זום
+    if (item.kind === 'pdf')   return <iframe src={`${item.src}#toolbar=1&navpanes=0&statusbar=0&view=FitH`} title={item.title || 'pdf'} />;
     if (item.kind === 'drive') return <iframe src={drivePreview(item.src)} title={item.title || 'drive'} allow="autoplay" allowFullScreen />;
     return <iframe src={item.src} title={item.title || 'doc'} />;
   };
