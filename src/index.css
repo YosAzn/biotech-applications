@@ -120,6 +120,10 @@ body {
   background-image: linear-gradient(to bottom, #fb923c 0%, #ea580c 55%, #9a3412 100%);
 }
 
+/* "יישומים" בכותרת המשנה — אותו כתב כמו "בביוטכנולוגיה", רק בולד; צבע כתום בבהיר / בורדו בכהה (כמו TECH) */
+.subtitle-hl { color: #ea580c; }
+[data-theme="dark"] .subtitle-hl { color: #fb7185; }
+
 /* =======================  THEME TOGGLE BUTTON  ===================== */
 .theme-toggle {
   position: fixed; top: 1.1rem; inset-inline-start: 1.1rem; z-index: 120;
