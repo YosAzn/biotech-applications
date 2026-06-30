@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>יישומים בביוטכנולוגיה</title>
+    <script>
+      // קובע ערכת נושא לפני הצביעה הראשונה (ברירת מחדל: בהיר) — מונע הבהוב
+      (function () {
+        try {
+          var t = localStorage.getItem('bioapps-theme');
+          document.documentElement.setAttribute('data-theme', (t === 'dark' || t === 'light') ? t : 'light');
+        } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+      })();
+    </script>
+    <script type="module" crossorigin src="/biotech-applications/assets/index-DpjFNkCV.js"></script>
+    <link rel="stylesheet" crossorigin href="/biotech-applications/assets/index-DX6kK_VC.css">
+  </head>
+     <script src="https://cdn.tailwindcss.com"></script>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
