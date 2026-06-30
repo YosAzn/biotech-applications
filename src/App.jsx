@@ -947,7 +947,7 @@ export default function App() {
              <div className="text-center mb-12 flex flex-col items-center">
                  <h1 className="hero-title text-6xl md:text-8xl lg:text-[11rem] font-black text-transparent bg-clip-text drop-shadow-[0_0_60px_rgba(6,182,212,0.45)] mb-4 sm:mb-8 tracking-tighter leading-none select-none">BIO<span className="text-orange-500">TECH</span></h1>
 
-                 <p className="text-cyan-300 text-lg sm:text-3xl md:text-4xl font-light tracking-[0.1em] sm:tracking-[0.2em] uppercase drop-shadow-md text-center"><span className="font-bold subtitle-hl">יישומים</span> בביוטכנולוגיה</p>
+                 <p className="subtitle-hl text-lg sm:text-3xl md:text-4xl font-light tracking-[0.1em] sm:tracking-[0.2em] uppercase drop-shadow-md text-center"><span className="font-bold">יישומים</span> בביוטכנולוגיה</p>
                  <p className="text-slate-400 text-base sm:text-xl md:text-2xl font-light mt-4 text-center max-w-3xl">פרויקט חקר: קסניה פועמת כביו-אינדיקטור · השפעת עקות סביבתיות על שונית האלמוגים</p>
 
              </div>
